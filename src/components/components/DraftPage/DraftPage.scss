@@ -1,0 +1,15 @@
+@import "../../../shared/colors.scss";
+
+.p-draft {
+    margin: 200px auto;
+    width: 100%;
+    max-width: 650px;
+}
+.p-draft-header {
+    color: $dark-grey;
+    display: inline;
+    font-size: 22pt;
+    margin-right: 16px;
+    position: relative;
+    top: -3px;
+}

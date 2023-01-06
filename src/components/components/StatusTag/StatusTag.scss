@@ -1,0 +1,10 @@
+@import '../../../shared/colors.scss';
+
+.a-status-tag {
+    background: $light-grey;
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: $dark-grey;
+    font-family: 'Calibre Semibold';
+    font-size: 11px;
+}

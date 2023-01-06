@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'Calibre Regular';
+  src: url('./assets/Fonts/Calibre/calibre-regular.woff2') format('woff2')
+}
+
+@font-face {
+  font-family: 'Calibre Light';
+  src: url('./assets/Fonts/Calibre/calibre-light.woff2') format('woff2')
+}
+
+@font-face {
+  font-family: 'Calibre Medium';
+  src: url('./assets/Fonts/Calibre/calibre-medium.woff2') format('woff2')
+}
+
+@font-face {
+  font-family: 'Calibre Semibold';
+  src: url('./assets/Fonts/Calibre/calibre-semibold.woff2') format('woff2')
+}
+
+@font-face {
+  font-family: 'Calibre Bold';
+  src: url('./assets/Fonts/Calibre/calibre-bold.woff2') format('woff2')
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Calibre Regular';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
