@@ -1,4 +1,5 @@
 import { IconButton } from '../IconButton';
+import { PaymentTerms } from '../PaymentTerms';
 import { StatusTag } from '../StatusTag';
 import './DraftPage.scss';
 
@@ -11,8 +12,7 @@ function DraftPage() {
         </div>
         <IconButton />
       </div>
-      {/* <PaymentTerms /> */}
-
+      <PaymentTerms />
     </div>
   );
 }

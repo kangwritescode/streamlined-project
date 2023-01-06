@@ -1,0 +1,13 @@
+@import '../../shared/colors.scss';
+
+.a-card {
+    border: 2px solid $lighter-grey;
+    border-radius: 8px;
+    padding: 12px 28px;
+}
+
+.a-card {
+    -webkit-box-shadow: 1px 10px 14px 0px rgba(240, 240, 240, 1);
+    -moz-box-shadow: 1px 10px 14px 0px rgba(240, 240, 240, 1);
+    box-shadow: 1px 10px 14px 0px rgba(240, 240, 240, 1);
+}
