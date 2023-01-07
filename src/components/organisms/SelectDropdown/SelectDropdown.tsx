@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { Listbox } from '@headlessui/react';
 import arrowDown from './arrowDown.svg';
-import { Term } from '../../shared/types/types';
+import { Term } from '../../../shared/types/types';
 
 interface SelectDropdownProps {
   className?: string;

@@ -1,11 +1,12 @@
 import './PaymentTerms.scss';
-import { Card } from '../Card';
-import { CircleIcon } from '../CircleIcon';
+import { Card } from '../../atoms/Card';
 import classNames from 'classnames';
 import { SelectDropdown } from '../SelectDropdown';
-import { DatePicker } from '../DatePicker';
-import { Term } from '../../shared/types/types';
+import { DatePicker } from '../../molecules/DatePicker';
+import { Term } from '../../../shared/types/types';
 import { useState } from 'react';
+import { IconHeader } from '../../molecules/IconHeader';
+import { Icon } from '../../../shared/types/types';
 
 interface PaymentTermsProps {
   className?: string;
@@ -19,10 +20,7 @@ function PaymentTerms({ className }: PaymentTermsProps) {
   }
   return (
     <Card className={classNames(className, 'disp-flex align-center justify-between')}>
-      <div className='o-payment-terms-header-wrapper disp-flex align-center'>
-        <CircleIcon className='o-payment-terms-circle-icon' />
-        <h3 className='o-payment-terms-header'>Payment terms</h3>
-      </div>
+      <IconHeader headerText="Payment terms" />
       <SelectDropdown className='o-payment-terms-select-dropdown' onChange={onChangeTerm} />
       {showDatePicker && <DatePicker />}
     </Card>

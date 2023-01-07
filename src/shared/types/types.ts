@@ -3,3 +3,8 @@ export interface Term {
     name: string;
     unavailable: boolean;
 }
+
+export enum Icon {
+    CALENDAR = 'CALENDAR',
+    PACKAGE = 'PACKAGE'
+}

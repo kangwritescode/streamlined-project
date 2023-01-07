@@ -1,5 +1,8 @@
+@import '../../../shared/colors.scss';
+
+
 .b-icon {
-    background: #F9D26A;
+    background: $yellow;
     border: none;
     border-radius: 5px;
     display: flex;

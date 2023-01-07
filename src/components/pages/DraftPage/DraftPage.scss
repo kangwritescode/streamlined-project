@@ -1,4 +1,4 @@
-@import "../../shared/colors.scss";
+@import "../../../shared/colors.scss";
 
 .p-draft {
     margin: 200px auto;
@@ -15,4 +15,7 @@
 }
 .p-draft-payment-terms {
     margin-top: 26px;
+}
+.p-draft-line-items {
+    margin-top: 20px;
 }

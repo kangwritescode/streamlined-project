@@ -1,0 +1,9 @@
+@import '../../../shared/colors.scss';
+
+.m-currency-input {
+    border: 1px solid $lighter-grey;
+    border-radius: 1px;
+    margin-top: 16px;
+    padding: 12px 12px 6px;
+    text-align: right;
+}

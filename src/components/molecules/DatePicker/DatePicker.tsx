@@ -2,12 +2,9 @@ import './DatePicker.scss';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
-interface DatePickerProps {
-  className?: string;
-}
+interface DatePickerProps { }
 
 function DatePicker(props: DatePickerProps) {
-  const { className } = props;
   const [date, setDate] = useState("")
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setDate(e.target.value)
   return (

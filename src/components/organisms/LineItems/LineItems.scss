@@ -1,0 +1,17 @@
+@import '../../../shared/colors.scss';
+
+.o-line-items-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.o-line-items-label {
+    border-top: 2px solid $yellow;
+    border-bottom: 2px solid $yellow;
+    color: $yellow;
+    letter-spacing: 1px;
+    font-family: 'Calibre Semibold';
+    font-size: 12px;
+    padding: 12px 0px 12px 10px;
+    text-align: left;
+}

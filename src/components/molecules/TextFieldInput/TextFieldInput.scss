@@ -1,0 +1,8 @@
+@import '../../../shared/colors.scss';
+
+.m-text-input {
+    border: 1px solid $lighter-grey;
+    border-radius: 1px;
+    padding: 12px 12px 6px;
+    margin-top: 16px;
+}

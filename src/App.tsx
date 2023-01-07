@@ -1,5 +1,5 @@
 import './App.scss';
-import { DraftPage } from './components/DraftPage';
+import { DraftPage } from './components/pages/DraftPage';
 
 function App() {
   return (
