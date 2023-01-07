@@ -3,7 +3,7 @@
 .p-draft {
     margin: 200px auto;
     width: 100%;
-    max-width: 650px;
+    max-width: 670px;
 }
 .p-draft-header {
     color: $dark-grey;
@@ -12,4 +12,7 @@
     margin-right: 16px;
     position: relative;
     top: -3px;
+}
+.p-draft-payment-terms {
+    margin-top: 26px;
 }

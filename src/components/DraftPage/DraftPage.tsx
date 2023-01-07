@@ -12,7 +12,7 @@ function DraftPage() {
         </div>
         <IconButton />
       </div>
-      <PaymentTerms />
+      <PaymentTerms className="p-draft-payment-terms" />
     </div>
   );
 }

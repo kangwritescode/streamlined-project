@@ -1,0 +1,15 @@
+@import '../../shared/colors.scss';
+
+@mixin box-style {
+    background: white;
+    border: 1px solid $lighter-grey;
+    border-radius: 2px;
+}
+
+.m-date-picker {
+    @include box-style;
+    font-family: 'Calibre Regular';
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+}
