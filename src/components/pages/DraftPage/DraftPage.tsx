@@ -5,30 +5,42 @@ import { LineItems } from '../../organisms/LineItems';
 import { PaymentTerms } from '../../organisms/PaymentTerms';
 import { Form } from 'react-final-form';
 import { FormValues } from '../../../shared/types/types'
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 function DraftPage() {
+  const [lineItemIDs, setLineItemIDs] = useState<Array<string>>([]);
 
   const submit = () => {
     console.log('Submitted Succesfully')
   }
 
+  const validate = useCallback((values: FormValues) => {
+    const errors: FormValues = {};
+    for (let ID of lineItemIDs) {
+      const itemFieldID = `item-${ID}`
+      if (!values[itemFieldID]) {
+        errors[itemFieldID] = 'Required'
+      }
+      const quantityFieldID = `quantity-${ID}`
+      if (!values[quantityFieldID]) {
+        errors[quantityFieldID] = 'Required'
+      }
+      const priceFieldID = `price-${ID}`
+      if (!values[priceFieldID]) {
+        errors[priceFieldID] = 'Required'
+      }
+      const amountFieldID = `amount-${ID}`
+      if (!values[amountFieldID]) {
+        errors[amountFieldID] = 'Required'
+      }
+    }
+    return errors
+  }, [lineItemIDs])
+
 
   return (
     <div className="p-draft">
-      <Form onSubmit={submit} validate={values => {
-        const errors: FormValues = {};
-        if (!values['item-default']) {
-          errors['item-default'] = 'Required'
-        }
-        if (!values['quantity-default']) {
-          errors['quantity-default'] = 'Required'
-        }
-        // if (!values.password) {
-        //   errors.password = 'Required'
-        // }
-        return errors
-      }} render={({ handleSubmit }) => {
+      <Form onSubmit={submit} validate={validate} render={({ handleSubmit }) => {
         return (
           <form onSubmit={handleSubmit}>
             <div className='disp-flex align-center justify-between'>
@@ -38,7 +50,7 @@ function DraftPage() {
               <IconButton text='Save' />
             </div>
             <PaymentTerms className="p-draft-payment-terms" />
-            <LineItems className='p-draft-line-items' />
+            <LineItems className='p-draft-line-items' lineItemsDidUpdate={(IDs: Array<string>) => setLineItemIDs(IDs)} />
           </form>
         )
       }} />

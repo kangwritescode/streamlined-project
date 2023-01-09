@@ -1,20 +1,51 @@
 import './PriceCalculator.scss';
 import classNames from 'classnames';
-import { Field } from 'react-final-form';
+import { Field, useField } from 'react-final-form';
 import { CurrencyInput } from '../../molecules/CurrencyInput';
 import { DiscountButton } from '../../molecules/DiscountButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TextButton } from '../../molecules/TextButton';
 import { DiscountType } from '../../../shared/types/types';
 
 interface PriceCalculatorProps {
   className?: string;
+  subtotal: number;
 }
 
 function PriceCalculator(props: PriceCalculatorProps) {
-  const { className } = props;
+  const { className, subtotal } = props;
+
+  const discountField = useField('discount')
+  const shippingField = useField('shipping')
+  const taxField = useField('tax')
+
   const [showFull, setShowFull] = useState(false);
   const [discountType, setDiscountType] = useState<DiscountType>('dollar');
+  const [totalAmount, setTotal] = useState(0)
+
+  const applyDiscount = (subtotal: number, discount: number) => {
+    let newSubtotal = subtotal;
+    if (discountType === 'percentage' && discount) {
+      discount = newSubtotal * (discount * .01)
+      newSubtotal = newSubtotal - discount
+    } else {
+      newSubtotal = newSubtotal - discount;
+    }
+    return newSubtotal
+  }
+
+  useEffect(() => {
+    if (subtotal) {
+      const shipping = Number(shippingField.input.value);
+      const tax = Number(taxField.input.value)
+      let discount = (discountType === 'dollar') ? Number(discountField.input.value) : Number(String(discountField.input.value).slice(0, -2))
+      
+      let newSubtotal = applyDiscount(subtotal, discount);
+      newSubtotal = newSubtotal + shipping + tax;
+      
+      setTotal(newSubtotal)
+    }
+  }, [subtotal, discountField.input.value, shippingField.input.value, taxField.input.value])
 
   const priceCalculatorClasses = classNames(className, 'o-price-calculator', {
     'o-price-calculator--full': showFull
@@ -42,11 +73,11 @@ function PriceCalculator(props: PriceCalculatorProps) {
       <span className={labelClasses}>Shipping</span>
       <span className={labelClasses}>Tax</span>
       <span className={labelClasses}>Total</span>
-      <Field className={fieldClasses} name='subtotal' component={CurrencyInput} prefix="$" />
+      <Field className={fieldClasses} name='subtotal' component={CurrencyInput} prefix="$" customValue={subtotal} readOnly />
       <Field className={fieldClasses} name='discount' component={CurrencyInput} {...(discountType === 'percentage' ? { suffix: " %" } : {})} />
       <Field className={fieldClasses} name='shipping' component={CurrencyInput} />
       <Field className={fieldClasses} name='tax' component={CurrencyInput} />
-      <Field className={fieldClasses} name='total' component={CurrencyInput} prefix="$" />
+      <Field className={fieldClasses} name='total' component={CurrencyInput} prefix="$" customValue={totalAmount} readOnly />
       <TextButton className={textButtonClasses} text="Add discount" onClick={() => setShowFull(true)} />
       <TextButton className={textButtonClasses} text="Add shipping" onClick={() => setShowFull(true)} />
       <TextButton className={textButtonClasses} text="Add tax" onClick={() => setShowFull(true)} />

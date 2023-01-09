@@ -7,12 +7,14 @@ interface CurrencyInputProps extends FieldRenderProps<string, any> {
   className?: string;
   isWholeNumber?: boolean;
   prefix?: string;
+  readOnly?: boolean;
   suffix?: string;
+  customValue?: number;
 }
 
 function CurrencyInput(props: CurrencyInputProps) {
-  const { className, isWholeNumber, prefix, meta, suffix } = props;
-  const hasError = (meta.error || meta.submitError) && meta.touched;
+  const { className, customValue, isWholeNumber, prefix, meta, readOnly, suffix } = props;
+  const hasError = (meta.error || meta.submitError) && meta.touched && !customValue;
   return (
     <div className={classNames(className, 'disp-flex flex-dir-column align-baseline')}>
       <NumericFormat
@@ -32,7 +34,8 @@ function CurrencyInput(props: CurrencyInputProps) {
         }
         {...(prefix ? { prefix: prefix } : {})}
         {...(suffix ? { suffix: suffix } : {})}
-        value={props.input.value}
+        readOnly={readOnly}
+        value={customValue || props.input.value}
       />
       {(hasError &&
         <span className='m-currency-input-error'>{meta.error || meta.submitError}</span>

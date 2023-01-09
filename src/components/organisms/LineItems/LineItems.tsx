@@ -8,9 +8,11 @@ import classNames from 'classnames';
 import uuid from 'react-uuid'
 import { PriceCalculator } from '../PriceCalculator';
 import { TextButton } from '../../molecules/TextButton';
+import { useField } from 'react-final-form';
 
 interface LineItemsProps {
   className?: string;
+  lineItemsDidUpdate?: (lineItems: Array<string>) => void;
 }
 
 const labels = [
@@ -22,9 +24,12 @@ const labels = [
 ];
 
 function LineItems(props: LineItemsProps) {
-  const { className } = props;
+  const { className, lineItemsDidUpdate } = props;
+
   const DEFAULT_ID = 'default';
   const [items, setItems] = useState(['default'])
+  const [amounts, setAmounts] = useState({})
+  const [subtotal, setSubtotal] = useState(0);
 
   const addItem = () => {
     const uniqueID = uuid();
@@ -39,6 +44,41 @@ function LineItems(props: LineItemsProps) {
     setItems(newItems)
   })
 
+  useEffect(() => {
+    if (lineItemsDidUpdate) {
+      lineItemsDidUpdate(items)
+    }
+  }, [items])
+
+  // delete amount from amounts state if line deleted
+  useEffect(() => {
+    for (let oldID of Object.keys(amounts)) {
+      if (!items.includes(oldID)) {
+        const newAmounts: any = {...amounts}
+        delete newAmounts[oldID]
+        setAmounts(newAmounts)
+      }
+    }
+  }, [items])
+
+  // when a row's amount changes, update the amounts state
+  const updateAmounts = (uniqueID: string, amount: number) => {
+    const newAmounts = {
+      ...amounts,
+      [uniqueID]: amount
+    }
+    setAmounts(newAmounts)
+  }
+
+  // recalculate subtotal when any amount changes
+  useEffect(() => {
+    let newSubtotal = 0;
+    for (let amount of Object.values(amounts)) {
+      newSubtotal = newSubtotal + Number(amount)
+    }
+    setSubtotal(newSubtotal)
+  }, [amounts])
+
   return (
     <Card className={classNames(className, 'disp-flex flex-dir-column')}>
       <IconHeader headerText='Line items' icon={'package'} />
@@ -50,10 +90,13 @@ function LineItems(props: LineItemsProps) {
         ))}
       </div>
       {items.map(uniqueID => (
-        <LineItem key={uniqueID} uniqueID={uniqueID} {...(uniqueID !== DEFAULT_ID ? { onRemove: removeItem } : {})} />
+        <LineItem
+          key={uniqueID} uniqueID={uniqueID}
+          onAmountDidChange={updateAmounts}
+          {...(uniqueID !== DEFAULT_ID ? { onRemove: removeItem } : {})} />
       ))}
       <TextButton className='o-line-items-new-line-btn' onClick={addItem} text="+ Add new line" />
-      <PriceCalculator className='o-line-items-price-calculator' />
+      <PriceCalculator className='o-line-items-price-calculator' subtotal={subtotal} />
     </Card>
   );
 }

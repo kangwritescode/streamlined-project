@@ -10,7 +10,7 @@ interface TextButtonProps {
 function TextButton(props: TextButtonProps) {
   const { className, onClick, text } = props;
   return (
-    <button className={classNames(className, 'm-text-button')} onClick={onClick}>
+    <button className={classNames(className, 'm-text-button')} onClick={onClick} type="button">
       {text}
     </button>
   );

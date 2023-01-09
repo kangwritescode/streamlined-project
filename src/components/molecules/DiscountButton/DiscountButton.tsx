@@ -17,12 +17,14 @@ function DiscountButton(props: DiscountButtonProps) {
     <div className={classNames(className, 'm-discount-button-container disp-flex')}>
       <button className={classNames('m-discount-button-btn', {
         'm-discount-button-btn--selected': discountType === 'dollar'
-      })} onClick={() => onClickDiscountType('dollar')}>
+      })} onClick={() => onClickDiscountType('dollar')}
+        type='button'>
         $
       </button>
       <button className={classNames('m-discount-button-btn', {
         'm-discount-button-btn--selected': discountType === 'percentage'
-      })} onClick={() => onClickDiscountType('percentage')}>
+      })} onClick={() => onClickDiscountType('percentage')}
+        type='button'>
         %
       </button>
     </div>
