@@ -12,7 +12,7 @@ import { useField } from 'react-final-form';
 
 interface LineItemsProps {
   className?: string;
-  lineItemsDidUpdate?: (lineItems: Array<string>) => void;
+  lineItemsDidUpdate?: (lineItems: any) => void;
 }
 
 const labels = [
@@ -27,21 +27,22 @@ function LineItems(props: LineItemsProps) {
   const { className, lineItemsDidUpdate } = props;
 
   const DEFAULT_ID = 'default';
-  const [items, setItems] = useState(['default'])
+  const [itemIds, setItemIds] = useState(['default'])
   const [amounts, setAmounts] = useState({})
+  const [items, setItems] = useState({})
   const [subtotal, setSubtotal] = useState(0);
 
   const addItem = () => {
     const uniqueID = uuid();
-    const newItems = [...items, uniqueID]
-    setItems(newItems)
+    const newItems = [...itemIds, uniqueID]
+    setItemIds(newItems)
   }
 
   const removeItem = ((uniqueID: string) => {
-    const removeIndex = items.indexOf(uniqueID);
-    const newItems = [...items]
+    const removeIndex = itemIds.indexOf(uniqueID);
+    const newItems = [...itemIds]
     newItems.splice(removeIndex, 1)
-    setItems(newItems)
+    setItemIds(newItems)
   })
 
   useEffect(() => {
@@ -53,13 +54,24 @@ function LineItems(props: LineItemsProps) {
   // delete amount from amounts state if line deleted
   useEffect(() => {
     for (let oldID of Object.keys(amounts)) {
-      if (!items.includes(oldID)) {
-        const newAmounts: any = {...amounts}
+      if (!itemIds.includes(oldID)) {
+        const newAmounts: any = { ...amounts }
         delete newAmounts[oldID]
         setAmounts(newAmounts)
       }
     }
-  }, [items])
+  }, [itemIds])
+
+  // delete item from items state if item deleted
+  useEffect(() => {
+    for (let oldID of Object.keys(items)) {
+      if (!itemIds.includes(oldID)) {
+        const newItems: any = { ...items }
+        delete newItems[oldID]
+        setItems(newItems)
+      }
+    }
+  }, [itemIds])
 
   // when a row's amount changes, update the amounts state
   const updateAmounts = (uniqueID: string, amount: number) => {
@@ -68,6 +80,15 @@ function LineItems(props: LineItemsProps) {
       [uniqueID]: amount
     }
     setAmounts(newAmounts)
+  }
+
+  // when a row's items data changes, update the items state
+  const updateItems = (uniqueID: string, updatedItem: any) => {
+    const newItems: any = {
+      ...items,
+      [uniqueID]: updatedItem
+    }
+    setItems(newItems)
   }
 
   // recalculate subtotal when any amount changes
@@ -89,10 +110,11 @@ function LineItems(props: LineItemsProps) {
           </span>
         ))}
       </div>
-      {items.map(uniqueID => (
+      {itemIds.map(uniqueID => (
         <LineItem
           key={uniqueID} uniqueID={uniqueID}
           onAmountDidChange={updateAmounts}
+          onItemDidUpdate={updateItems}
           {...(uniqueID !== DEFAULT_ID ? { onRemove: removeItem } : {})} />
       ))}
       <TextButton className='o-line-items-new-line-btn' onClick={addItem} text="+ Add new line" />

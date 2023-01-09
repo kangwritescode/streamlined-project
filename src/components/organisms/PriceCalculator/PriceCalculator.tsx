@@ -27,9 +27,9 @@ function PriceCalculator(props: PriceCalculatorProps) {
     let newSubtotal = subtotal;
     if (discountType === 'percentage' && discount) {
       discount = newSubtotal * (discount * .01)
-      newSubtotal = newSubtotal - discount
+      newSubtotal = Math.max(0, newSubtotal - discount)
     } else {
-      newSubtotal = newSubtotal - discount;
+      newSubtotal = Math.max(0, newSubtotal - discount)
     }
     return newSubtotal
   }
@@ -39,11 +39,13 @@ function PriceCalculator(props: PriceCalculatorProps) {
       const shipping = Number(shippingField.input.value);
       const tax = Number(taxField.input.value)
       let discount = (discountType === 'dollar') ? Number(discountField.input.value) : Number(String(discountField.input.value).slice(0, -2))
-      
+
       let newSubtotal = applyDiscount(subtotal, discount);
       newSubtotal = newSubtotal + shipping + tax;
-      
+
       setTotal(newSubtotal)
+    } else {
+      setTotal(0)
     }
   }, [subtotal, discountField.input.value, shippingField.input.value, taxField.input.value])
 

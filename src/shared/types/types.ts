@@ -1,4 +1,4 @@
-export interface Term {
+export interface TermOption {
     id: number;
     name: string;
     unavailable: boolean;

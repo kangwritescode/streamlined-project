@@ -1,11 +1,30 @@
 @import '../../../shared/colors.scss';
 
+
+.m-date-picker-container {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+}
 .m-date-picker {
     background: white;
     border: 1px solid $lighter-grey;
     border-radius: 2px;
     font-family: 'Calibre Regular';
-    padding: 10px;
     font-size: 14px;
+    padding: 10px;
     width: 100%;
+}
+
+.m-date-picker--error {
+    border-color: red;
+}
+
+.m-date-picker-error {
+    position: absolute;
+    bottom: 0;
+    bottom: -10px;
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
 }

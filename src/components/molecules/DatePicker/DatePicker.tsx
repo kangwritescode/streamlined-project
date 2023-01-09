@@ -1,14 +1,21 @@
 import './DatePicker.scss';
+import { FieldRenderProps } from 'react-final-form';
 import classNames from 'classnames';
-import React, { useState } from 'react';
 
-interface DatePickerProps { }
+interface DatePickerProps extends FieldRenderProps<string, any> { }
 
 function DatePicker(props: DatePickerProps) {
-  const [date, setDate] = useState("")
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setDate(e.target.value)
+  const { input, meta } = props;
+  const hasError = (meta.error || meta.submitError) && meta.touched;
   return (
-    <input className="m-date-picker" onChange={onChange} type="date" value={date} />
+    <div className={classNames('m-date-picker-container disp-flex flex-dir-column align-baseline')}>
+      <input className={classNames('m-date-picker', {
+        "m-date-picker--error": hasError
+      })} {...input} type="date" />
+      {(hasError &&
+        <span className='m-date-picker-error'>{meta.error || meta.submitError}</span>
+      )}
+    </div>
   );
 }
 
