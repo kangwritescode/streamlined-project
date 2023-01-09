@@ -1,0 +1,13 @@
+@import '../../../shared/colors.scss';
+
+.m-text-button {
+    align-self: baseline;
+    background: none;
+    border: none;
+    color: $blue;
+    cursor: pointer;
+    display: inline-flex;
+    padding: 0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}

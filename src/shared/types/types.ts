@@ -4,7 +4,8 @@ export interface Term {
     unavailable: boolean;
 }
 
-export enum Icon {
-    CALENDAR = 'CALENDAR',
-    PACKAGE = 'PACKAGE'
-}
+export type Icon = 'calendar' | 'package'
+
+export type DiscountType = 'dollar' | 'percentage'
+
+export interface FormValues { [key: string]: any };

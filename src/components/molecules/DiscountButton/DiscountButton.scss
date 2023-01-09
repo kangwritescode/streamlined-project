@@ -1,0 +1,22 @@
+@import '../../../shared/colors.scss';
+
+.m-discount-button-container {
+    grid-row: 2;
+}
+.m-discount-button-btn {
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    &:nth-child(1) {
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
+    }
+    &:nth-child(2) {
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+    }
+}
+.m-discount-button-btn--selected {
+    background: $yellow;
+}

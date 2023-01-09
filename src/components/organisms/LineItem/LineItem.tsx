@@ -3,21 +3,28 @@ import classNames from 'classnames';
 import { Field } from 'react-final-form';
 import { TextFieldInput } from '../../molecules/TextFieldInput';
 import { CurrencyInput } from '../../molecules/CurrencyInput';
+import xSvg from "./x.svg";
 
 interface LineItemProps {
-  row: number;
+  uniqueID: string;
+  onRemove?: (nthRow: string) => void;
 };
 
 function LineItem(props: LineItemProps) {
-  const { row } = props;
+  const { onRemove, uniqueID } = props;
   return (
-    <>
-      <Field name={`item-${row}`} render={TextFieldInput} />
-      <Field name={`description-${row}`} render={TextFieldInput} />
-      <Field name={`quantity-${row}`} component={CurrencyInput} isWholeNumber />
-      <Field name={`price-${row}`} component={CurrencyInput} />
-      <Field name={`amount-${row}`} component={CurrencyInput} />
-    </>
+    <div className='o-line-item disp-flex align-baseline'>
+      <Field className='o-line-item-field' name={`item-${uniqueID}`} render={TextFieldInput} required />
+      <Field className='o-line-item-field' name={`description-${uniqueID}`} render={TextFieldInput} />
+      <Field className='o-line-item-field' name={`quantity-${uniqueID}`} component={CurrencyInput} isWholeNumber required />
+      <Field className='o-line-item-field' name={`price-${uniqueID}`} component={CurrencyInput} required />
+      <Field className='o-line-item-field' name={`amount-${uniqueID}`} component={CurrencyInput} required />
+      {onRemove && (
+        <button className='o-line-item-remove-btn' onClick={() => onRemove(uniqueID)}>
+          <img height={8} src={xSvg} />
+        </button>
+      )}
+    </div>
   );
 }
 

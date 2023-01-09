@@ -2,8 +2,15 @@
 
 .m-currency-input {
     border: 1px solid $lighter-grey;
-    border-radius: 1px;
-    margin-top: 16px;
-    padding: 12px 12px 6px;
+    border-radius: 2px;
+    padding: 12px 6px 6px 18px;
     text-align: right;
+}
+.m-currency-input--error {
+    border-color: red;
+}
+.m-currency-input-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
 }

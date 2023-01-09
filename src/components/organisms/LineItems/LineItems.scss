@@ -1,10 +1,5 @@
 @import '../../../shared/colors.scss';
 
-.o-line-items-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-}
-
 .o-line-items-label {
     border-top: 2px solid $yellow;
     border-bottom: 2px solid $yellow;
@@ -12,6 +7,35 @@
     letter-spacing: 1px;
     font-family: 'Calibre Semibold';
     font-size: 12px;
-    padding: 12px 0px 12px 10px;
+    padding: 12px 0px 14px 6px;
     text-align: left;
+    white-space: nowrap;
+}
+.o-line-items-header {
+    display: flex;
+}
+
+.o-line-items-label:nth-child(1) {
+    width: 178px;
+}
+.o-line-items-label:nth-child(3) {
+    padding-left: 96px;
+}
+.o-line-items-label:nth-child(4) {
+    padding-left: 18px;
+}
+.o-line-items-label:nth-child(5) {
+    text-align: right;
+    padding-left: 16px;
+    padding-right: 4px;
+}
+
+.o-line-items-new-line-btn {
+    margin-top: 16px;
+}
+
+.o-line-items-price-calculator {
+    margin-left: auto;
+    margin-top: 40px;
+    margin-bottom: 36px;
 }

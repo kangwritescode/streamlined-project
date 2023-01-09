@@ -6,7 +6,6 @@ import { DatePicker } from '../../molecules/DatePicker';
 import { Term } from '../../../shared/types/types';
 import { useState } from 'react';
 import { IconHeader } from '../../molecules/IconHeader';
-import { Icon } from '../../../shared/types/types';
 
 interface PaymentTermsProps {
   className?: string;
